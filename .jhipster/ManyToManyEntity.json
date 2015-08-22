@@ -1,0 +1,17 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "multiRelationalEntity",
+      "relationshipFieldName": "multiRelationalEntity",
+      "otherEntityName": "multiRelationalEntity",
+      "relationshipType": "many-to-many",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "manyToManyEntity"
+    }
+  ],
+  "fields": [],
+  "changelogDate": "20150822180549",
+  "dto": "no",
+  "pagination": "no"
+}

@@ -1,0 +1,21 @@
+{
+    "jhipsterApp": {
+        "oneToManyEntity" : {
+            "home": {
+                "title": "OneToManyEntitys",
+                "createLabel": "Create a new OneToManyEntity",
+                "createOrEditLabel": "Create or edit a OneToManyEntity"
+            },
+            "created": "A new OneToManyEntity is created with identifier {{ param }}",
+            "updated": "A OneToManyEntity is updated with identifier {{ param }}",
+            "deleted": "A OneToManyEntity is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete OneToManyEntity {{ id }}?"
+            },
+            "detail": {
+                "title": "OneToManyEntity"
+            },
+            "multiRelationalEntity": "multiRelationalEntity"
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "jhipsterApp": {
+        "oneToOneEntity" : {
+            "home": {
+                "title": "OneToOneEntitys",
+                "createLabel": "Créer un nouveau OneToOneEntity",
+                "createOrEditLabel": "Créer ou éditer un OneToOneEntity"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le OneToOneEntity {{ id }} ?"
+            },
+            "detail": {
+                "title": "OneToOneEntity"
+            },
+            "multiRelationalEntity": "multiRelationalEntity"
+        }
+    }
+}
+

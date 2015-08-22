@@ -1,0 +1,23 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "multiRelationalDisplayFieldEntity",
+      "relationshipFieldName": "multiRelationalDisplayFieldEntity",
+      "otherEntityName": "multiRelationalDisplayFieldEntity",
+      "relationshipType": "one-to-one",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "oneToOneDisplayFieldEntity"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "displayField",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20150822180549",
+  "dto": "no",
+  "pagination": "no"
+}

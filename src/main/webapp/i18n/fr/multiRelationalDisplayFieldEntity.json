@@ -1,0 +1,21 @@
+{
+    "jhipsterApp": {
+        "multiRelationalDisplayFieldEntity" : {
+            "home": {
+                "title": "MultiRelationalDisplayFieldEntitys",
+                "createLabel": "Créer un nouveau MultiRelationalDisplayFieldEntity",
+                "createOrEditLabel": "Créer ou éditer un MultiRelationalDisplayFieldEntity"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le MultiRelationalDisplayFieldEntity {{ id }} ?"
+            },
+            "detail": {
+                "title": "MultiRelationalDisplayFieldEntity"
+            },
+            "oneToOneDisplayFieldEntity": "oneToOneDisplayFieldEntity",
+            "manyToManyDisplayFieldEntity": "manyToManyDisplayFieldEntity",
+            "oneToManyDisplayFieldEntity": "oneToManyDisplayFieldEntity"
+        }
+    }
+}
+

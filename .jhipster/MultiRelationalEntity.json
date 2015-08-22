@@ -1,0 +1,35 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "oneToOneEntity",
+      "relationshipFieldName": "oneToOneEntity",
+      "otherEntityName": "oneToOneEntity",
+      "relationshipType": "one-to-one",
+      "otherEntityRelationshipName": "multiRelationalEntity",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipId": 2,
+      "relationshipName": "manyToManyEntity",
+      "relationshipFieldName": "manyToManyEntity",
+      "otherEntityName": "manyToManyEntity",
+      "relationshipType": "many-to-many",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipId": 3,
+      "relationshipName": "oneToManyEntity",
+      "relationshipFieldName": "oneToManyEntity",
+      "otherEntityName": "oneToManyEntity",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    }
+  ],
+  "fields": [],
+  "changelogDate": "20150822180549",
+  "dto": "no",
+  "pagination": "no"
+}
