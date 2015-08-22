@@ -1,0 +1,41 @@
+entity MultiRelationalEntity{
+}
+entity OneToOneEntity{
+}
+entity OneToManyEntity{
+}
+entity ManyToManyEntity{
+}
+
+relationship ManyToOne{
+  MultiRelationalEntity{oneToManyEntity} to OneToManyEntity{multiRelationalEntity}
+}
+relationship OneToOne{
+  MultiRelationalEntity{oneToOneEntity} to OneToOneEntity{multiRelationalEntity}
+}
+relationship ManyToMany{
+  MultiRelationalEntity{manyToManyEntity} to ManyToManyEntity{multiRelationalEntity}
+}
+
+
+
+entity MultiRelationalDisplayFieldEntity{
+}
+entity OneToOneDisplayFieldEntity{
+  displayField String
+}
+entity OneToManyDisplayFieldEntity{
+  displayField String
+}
+entity ManyToManyDisplayFieldEntity{
+  displayField String
+}
+relationship ManyToOne{
+  MultiRelationalDisplayFieldEntity{oneToManyDisplayFieldEntity(displayField)} to OneToManyDisplayFieldEntity{multiRelationalDisplayFieldEntity}
+}
+relationship OneToOne{
+  MultiRelationalDisplayFieldEntity{oneToOneDisplayFieldEntity(displayField)} to OneToOneDisplayFieldEntity{multiRelationalDisplayFieldEntity}
+}
+relationship ManyToMany{
+  MultiRelationalDisplayFieldEntity{manyToManyDisplayFieldEntity(displayField)} to ManyToManyDisplayFieldEntity{multiRelationalDisplayFieldEntity}
+}
