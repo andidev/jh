@@ -36,6 +36,9 @@ public class MultiRelationalEntity implements Serializable {
     @ManyToOne
     private OneToManyEntity oneToManyEntity;
 
+    @OneToOne
+    private User userEntity;
+
     public Long getId() {
         return id;
     }
@@ -66,6 +69,14 @@ public class MultiRelationalEntity implements Serializable {
 
     public void setOneToManyEntity(OneToManyEntity oneToManyEntity) {
         this.oneToManyEntity = oneToManyEntity;
+    }
+
+    public User getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(User user) {
+        this.userEntity = user;
     }
 
     @Override

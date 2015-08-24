@@ -7,6 +7,10 @@ entity OneToManyEntity{
 entity ManyToManyEntity{
 }
 
+entity User {
+
+}
+
 relationship ManyToOne{
   MultiRelationalEntity{oneToManyEntity} to OneToManyEntity{multiRelationalEntity}
 }
@@ -15,6 +19,9 @@ relationship OneToOne{
 }
 relationship ManyToMany{
   MultiRelationalEntity{manyToManyEntity} to ManyToManyEntity{multiRelationalEntity}
+}
+relationship ManyToOne{
+  MultiRelationalEntity{userEntity} to User{multiRelationalEntity}
 }
 
 

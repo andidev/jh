@@ -45,6 +45,7 @@
                     <th translate="jhipsterApp.multiRelationalEntity.oneToOneEntity">oneToOneEntity</th>
                     <th translate="jhipsterApp.multiRelationalEntity.manyToManyEntity">manyToManyEntity</th>
                     <th translate="jhipsterApp.multiRelationalEntity.oneToManyEntity">oneToManyEntity</th>
+                    <th translate="jhipsterApp.multiRelationalEntity.userEntity">userEntity</th>
                     <th></th>
                 </tr>
             </thead>
@@ -61,6 +62,9 @@
                     </td>
                     <td>
                         <a ui-sref="oneToManyEntity.detail({id:multiRelationalEntity.oneToManyEntity.id})">{{multiRelationalEntity.oneToManyEntity.id}}</a>
+                    </td>
+                    <td>
+                        {{multiRelationalEntity.userEntity.login}}
                     </td>
                     <td>
                         <button type="submit"

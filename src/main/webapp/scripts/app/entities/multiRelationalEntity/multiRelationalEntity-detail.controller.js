@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jhipsterApp')
-    .controller('MultiRelationalEntityDetailController', function ($scope, $rootScope, $stateParams, entity, MultiRelationalEntity, OneToOneEntity, ManyToManyEntity, OneToManyEntity) {
+    .controller('MultiRelationalEntityDetailController', function ($scope, $rootScope, $stateParams, entity, MultiRelationalEntity, OneToOneEntity, ManyToManyEntity, OneToManyEntity, User) {
         $scope.multiRelationalEntity = entity;
         $scope.load = function (id) {
             MultiRelationalEntity.get({id: id}, function(result) {

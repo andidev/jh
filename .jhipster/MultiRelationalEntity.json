@@ -26,6 +26,16 @@
       "otherEntityName": "oneToManyEntity",
       "relationshipType": "many-to-one",
       "otherEntityField": "id"
+    },
+    {
+        "relationshipId": 4,
+        "relationshipName": "userEntity",
+        "relationshipFieldName": "userEntity",
+        "otherEntityName": "user",
+        "relationshipType": "one-to-one",
+        "otherEntityRelationshipName": "multiRelationalEntity",
+        "otherEntityField": "login",
+        "ownerSide": true
     }
   ],
   "fields": [],

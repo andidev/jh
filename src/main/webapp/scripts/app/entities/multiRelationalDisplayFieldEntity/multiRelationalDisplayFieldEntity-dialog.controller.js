@@ -1,11 +1,19 @@
 'use strict';
 
 angular.module('jhipsterApp').controller('MultiRelationalDisplayFieldEntityDialogController',
-    ['$scope', '$stateParams', '$modalInstance', 'entity', 'MultiRelationalDisplayFieldEntity', 'OneToOneDisplayFieldEntity', 'ManyToManyDisplayFieldEntity', 'OneToManyDisplayFieldEntity',
-        function($scope, $stateParams, $modalInstance, entity, MultiRelationalDisplayFieldEntity, OneToOneDisplayFieldEntity, ManyToManyDisplayFieldEntity, OneToManyDisplayFieldEntity) {
+    ['$scope', '$stateParams', '$modalInstance', '$q', 'entity', 'MultiRelationalDisplayFieldEntity', 'OneToOneDisplayFieldEntity', 'ManyToManyDisplayFieldEntity', 'OneToManyDisplayFieldEntity',
+        function($scope, $stateParams, $modalInstance, $q, entity, MultiRelationalDisplayFieldEntity, OneToOneDisplayFieldEntity, ManyToManyDisplayFieldEntity, OneToManyDisplayFieldEntity) {
 
         $scope.multiRelationalDisplayFieldEntity = entity;
         $scope.onetoonedisplayfieldentitys = OneToOneDisplayFieldEntity.query({filter: 'multirelationaldisplayfieldentity-is-null'});
+        $q.all([$scope.multiRelationalDisplayFieldEntity.$promise, $scope.onetoonedisplayfieldentitys.$promise]).then(function() {
+            if (!$scope.multiRelationalDisplayFieldEntity.oneToOneDisplayFieldEntity.id) {
+                return $q.reject();
+            }
+            return OneToOneDisplayFieldEntity.get({id : $scope.multiRelationalDisplayFieldEntity.oneToOneDisplayFieldEntity.id}).$promise;
+        }).then(function(oneToOneDisplayFieldEntity) {
+            $scope.onetoonedisplayfieldentitys.push(oneToOneDisplayFieldEntity);
+        });
         $scope.manytomanydisplayfieldentitys = ManyToManyDisplayFieldEntity.query();
         $scope.onetomanydisplayfieldentitys = OneToManyDisplayFieldEntity.query();
         $scope.load = function(id) {

@@ -14,7 +14,8 @@
             },
             "oneToOneEntity": "oneToOneEntity",
             "manyToManyEntity": "manyToManyEntity",
-            "oneToManyEntity": "oneToManyEntity"
+            "oneToManyEntity": "oneToManyEntity",
+            "userEntity": "userEntity"
         }
     }
 }
