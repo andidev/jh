@@ -1,12 +1,18 @@
 'use strict';
 
 angular.module('jhipsterApp')
-    .controller('MultiRelationalEntityController', function ($scope, MultiRelationalEntity) {
+    .controller('MultiRelationalEntityController', function ($scope, MultiRelationalEntity, ParseLinks) {
         $scope.multiRelationalEntitys = [];
+        $scope.page = 1;
         $scope.loadAll = function() {
-            MultiRelationalEntity.query(function(result) {
-               $scope.multiRelationalEntitys = result;
+            MultiRelationalEntity.query({page: $scope.page, per_page: 20}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                $scope.multiRelationalEntitys = result;
             });
+        };
+        $scope.loadPage = function(page) {
+            $scope.page = page;
+            $scope.loadAll();
         };
         $scope.loadAll();
 

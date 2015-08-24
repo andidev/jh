@@ -3,6 +3,8 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.Application;
 import com.mycompany.myapp.domain.ManyToManyEntity;
 import com.mycompany.myapp.repository.ManyToManyEntityRepository;
+import com.mycompany.myapp.web.rest.dto.ManyToManyEntityDTO;
+import com.mycompany.myapp.web.rest.mapper.ManyToManyEntityMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +47,9 @@ public class ManyToManyEntityResourceTest {
     private ManyToManyEntityRepository manyToManyEntityRepository;
 
     @Inject
+    private ManyToManyEntityMapper manyToManyEntityMapper;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     private MockMvc restManyToManyEntityMockMvc;
@@ -56,6 +61,7 @@ public class ManyToManyEntityResourceTest {
         MockitoAnnotations.initMocks(this);
         ManyToManyEntityResource manyToManyEntityResource = new ManyToManyEntityResource();
         ReflectionTestUtils.setField(manyToManyEntityResource, "manyToManyEntityRepository", manyToManyEntityRepository);
+        ReflectionTestUtils.setField(manyToManyEntityResource, "manyToManyEntityMapper", manyToManyEntityMapper);
         this.restManyToManyEntityMockMvc = MockMvcBuilders.standaloneSetup(manyToManyEntityResource).setMessageConverters(jacksonMessageConverter).build();
     }
 
@@ -70,10 +76,11 @@ public class ManyToManyEntityResourceTest {
         int databaseSizeBeforeCreate = manyToManyEntityRepository.findAll().size();
 
         // Create the ManyToManyEntity
+        ManyToManyEntityDTO manyToManyEntityDTO = manyToManyEntityMapper.manyToManyEntityToManyToManyEntityDTO(manyToManyEntity);
 
         restManyToManyEntityMockMvc.perform(post("/api/manyToManyEntitys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(manyToManyEntity)))
+                .content(TestUtil.convertObjectToJsonBytes(manyToManyEntityDTO)))
                 .andExpect(status().isCreated());
 
         // Validate the ManyToManyEntity in the database
@@ -126,10 +133,11 @@ public class ManyToManyEntityResourceTest {
 
         // Update the manyToManyEntity
         
+        ManyToManyEntityDTO manyToManyEntityDTO = manyToManyEntityMapper.manyToManyEntityToManyToManyEntityDTO(manyToManyEntity);
 
         restManyToManyEntityMockMvc.perform(put("/api/manyToManyEntitys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(manyToManyEntity)))
+                .content(TestUtil.convertObjectToJsonBytes(manyToManyEntityDTO)))
                 .andExpect(status().isOk());
 
         // Validate the ManyToManyEntity in the database

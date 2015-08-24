@@ -1,12 +1,18 @@
 'use strict';
 
 angular.module('jhipsterApp')
-    .controller('MultiRelationalDisplayFieldEntityController', function ($scope, MultiRelationalDisplayFieldEntity) {
+    .controller('MultiRelationalDisplayFieldEntityController', function ($scope, MultiRelationalDisplayFieldEntity, ParseLinks) {
         $scope.multiRelationalDisplayFieldEntitys = [];
+        $scope.page = 1;
         $scope.loadAll = function() {
-            MultiRelationalDisplayFieldEntity.query(function(result) {
-               $scope.multiRelationalDisplayFieldEntitys = result;
+            MultiRelationalDisplayFieldEntity.query({page: $scope.page, per_page: 20}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                $scope.multiRelationalDisplayFieldEntitys = result;
             });
+        };
+        $scope.loadPage = function(page) {
+            $scope.page = page;
+            $scope.loadAll();
         };
         $scope.loadAll();
 

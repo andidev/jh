@@ -3,6 +3,8 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.Application;
 import com.mycompany.myapp.domain.ManyToManyDisplayFieldEntity;
 import com.mycompany.myapp.repository.ManyToManyDisplayFieldEntityRepository;
+import com.mycompany.myapp.web.rest.dto.ManyToManyDisplayFieldEntityDTO;
+import com.mycompany.myapp.web.rest.mapper.ManyToManyDisplayFieldEntityMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,6 +49,9 @@ public class ManyToManyDisplayFieldEntityResourceTest {
     private ManyToManyDisplayFieldEntityRepository manyToManyDisplayFieldEntityRepository;
 
     @Inject
+    private ManyToManyDisplayFieldEntityMapper manyToManyDisplayFieldEntityMapper;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     private MockMvc restManyToManyDisplayFieldEntityMockMvc;
@@ -58,6 +63,7 @@ public class ManyToManyDisplayFieldEntityResourceTest {
         MockitoAnnotations.initMocks(this);
         ManyToManyDisplayFieldEntityResource manyToManyDisplayFieldEntityResource = new ManyToManyDisplayFieldEntityResource();
         ReflectionTestUtils.setField(manyToManyDisplayFieldEntityResource, "manyToManyDisplayFieldEntityRepository", manyToManyDisplayFieldEntityRepository);
+        ReflectionTestUtils.setField(manyToManyDisplayFieldEntityResource, "manyToManyDisplayFieldEntityMapper", manyToManyDisplayFieldEntityMapper);
         this.restManyToManyDisplayFieldEntityMockMvc = MockMvcBuilders.standaloneSetup(manyToManyDisplayFieldEntityResource).setMessageConverters(jacksonMessageConverter).build();
     }
 
@@ -73,10 +79,11 @@ public class ManyToManyDisplayFieldEntityResourceTest {
         int databaseSizeBeforeCreate = manyToManyDisplayFieldEntityRepository.findAll().size();
 
         // Create the ManyToManyDisplayFieldEntity
+        ManyToManyDisplayFieldEntityDTO manyToManyDisplayFieldEntityDTO = manyToManyDisplayFieldEntityMapper.manyToManyDisplayFieldEntityToManyToManyDisplayFieldEntityDTO(manyToManyDisplayFieldEntity);
 
         restManyToManyDisplayFieldEntityMockMvc.perform(post("/api/manyToManyDisplayFieldEntitys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(manyToManyDisplayFieldEntity)))
+                .content(TestUtil.convertObjectToJsonBytes(manyToManyDisplayFieldEntityDTO)))
                 .andExpect(status().isCreated());
 
         // Validate the ManyToManyDisplayFieldEntity in the database
@@ -133,10 +140,11 @@ public class ManyToManyDisplayFieldEntityResourceTest {
         // Update the manyToManyDisplayFieldEntity
         manyToManyDisplayFieldEntity.setDisplayField(UPDATED_DISPLAY_FIELD);
         
+        ManyToManyDisplayFieldEntityDTO manyToManyDisplayFieldEntityDTO = manyToManyDisplayFieldEntityMapper.manyToManyDisplayFieldEntityToManyToManyDisplayFieldEntityDTO(manyToManyDisplayFieldEntity);
 
         restManyToManyDisplayFieldEntityMockMvc.perform(put("/api/manyToManyDisplayFieldEntitys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(manyToManyDisplayFieldEntity)))
+                .content(TestUtil.convertObjectToJsonBytes(manyToManyDisplayFieldEntityDTO)))
                 .andExpect(status().isOk());
 
         // Validate the ManyToManyDisplayFieldEntity in the database

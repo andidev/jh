@@ -3,6 +3,8 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.Application;
 import com.mycompany.myapp.domain.MultiRelationalEntity;
 import com.mycompany.myapp.repository.MultiRelationalEntityRepository;
+import com.mycompany.myapp.web.rest.dto.MultiRelationalEntityDTO;
+import com.mycompany.myapp.web.rest.mapper.MultiRelationalEntityMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +47,9 @@ public class MultiRelationalEntityResourceTest {
     private MultiRelationalEntityRepository multiRelationalEntityRepository;
 
     @Inject
+    private MultiRelationalEntityMapper multiRelationalEntityMapper;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     private MockMvc restMultiRelationalEntityMockMvc;
@@ -56,6 +61,7 @@ public class MultiRelationalEntityResourceTest {
         MockitoAnnotations.initMocks(this);
         MultiRelationalEntityResource multiRelationalEntityResource = new MultiRelationalEntityResource();
         ReflectionTestUtils.setField(multiRelationalEntityResource, "multiRelationalEntityRepository", multiRelationalEntityRepository);
+        ReflectionTestUtils.setField(multiRelationalEntityResource, "multiRelationalEntityMapper", multiRelationalEntityMapper);
         this.restMultiRelationalEntityMockMvc = MockMvcBuilders.standaloneSetup(multiRelationalEntityResource).setMessageConverters(jacksonMessageConverter).build();
     }
 
@@ -70,10 +76,11 @@ public class MultiRelationalEntityResourceTest {
         int databaseSizeBeforeCreate = multiRelationalEntityRepository.findAll().size();
 
         // Create the MultiRelationalEntity
+        MultiRelationalEntityDTO multiRelationalEntityDTO = multiRelationalEntityMapper.multiRelationalEntityToMultiRelationalEntityDTO(multiRelationalEntity);
 
         restMultiRelationalEntityMockMvc.perform(post("/api/multiRelationalEntitys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(multiRelationalEntity)))
+                .content(TestUtil.convertObjectToJsonBytes(multiRelationalEntityDTO)))
                 .andExpect(status().isCreated());
 
         // Validate the MultiRelationalEntity in the database
@@ -126,10 +133,11 @@ public class MultiRelationalEntityResourceTest {
 
         // Update the multiRelationalEntity
         
+        MultiRelationalEntityDTO multiRelationalEntityDTO = multiRelationalEntityMapper.multiRelationalEntityToMultiRelationalEntityDTO(multiRelationalEntity);
 
         restMultiRelationalEntityMockMvc.perform(put("/api/multiRelationalEntitys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(multiRelationalEntity)))
+                .content(TestUtil.convertObjectToJsonBytes(multiRelationalEntityDTO)))
                 .andExpect(status().isOk());
 
         // Validate the MultiRelationalEntity in the database

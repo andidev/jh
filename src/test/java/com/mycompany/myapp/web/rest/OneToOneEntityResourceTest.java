@@ -3,6 +3,8 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.Application;
 import com.mycompany.myapp.domain.OneToOneEntity;
 import com.mycompany.myapp.repository.OneToOneEntityRepository;
+import com.mycompany.myapp.web.rest.dto.OneToOneEntityDTO;
+import com.mycompany.myapp.web.rest.mapper.OneToOneEntityMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +47,9 @@ public class OneToOneEntityResourceTest {
     private OneToOneEntityRepository oneToOneEntityRepository;
 
     @Inject
+    private OneToOneEntityMapper oneToOneEntityMapper;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     private MockMvc restOneToOneEntityMockMvc;
@@ -56,6 +61,7 @@ public class OneToOneEntityResourceTest {
         MockitoAnnotations.initMocks(this);
         OneToOneEntityResource oneToOneEntityResource = new OneToOneEntityResource();
         ReflectionTestUtils.setField(oneToOneEntityResource, "oneToOneEntityRepository", oneToOneEntityRepository);
+        ReflectionTestUtils.setField(oneToOneEntityResource, "oneToOneEntityMapper", oneToOneEntityMapper);
         this.restOneToOneEntityMockMvc = MockMvcBuilders.standaloneSetup(oneToOneEntityResource).setMessageConverters(jacksonMessageConverter).build();
     }
 
@@ -70,10 +76,11 @@ public class OneToOneEntityResourceTest {
         int databaseSizeBeforeCreate = oneToOneEntityRepository.findAll().size();
 
         // Create the OneToOneEntity
+        OneToOneEntityDTO oneToOneEntityDTO = oneToOneEntityMapper.oneToOneEntityToOneToOneEntityDTO(oneToOneEntity);
 
         restOneToOneEntityMockMvc.perform(post("/api/oneToOneEntitys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(oneToOneEntity)))
+                .content(TestUtil.convertObjectToJsonBytes(oneToOneEntityDTO)))
                 .andExpect(status().isCreated());
 
         // Validate the OneToOneEntity in the database
@@ -126,10 +133,11 @@ public class OneToOneEntityResourceTest {
 
         // Update the oneToOneEntity
         
+        OneToOneEntityDTO oneToOneEntityDTO = oneToOneEntityMapper.oneToOneEntityToOneToOneEntityDTO(oneToOneEntity);
 
         restOneToOneEntityMockMvc.perform(put("/api/oneToOneEntitys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(oneToOneEntity)))
+                .content(TestUtil.convertObjectToJsonBytes(oneToOneEntityDTO)))
                 .andExpect(status().isOk());
 
         // Validate the OneToOneEntity in the database

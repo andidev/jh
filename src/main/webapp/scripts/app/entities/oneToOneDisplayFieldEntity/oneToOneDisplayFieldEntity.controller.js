@@ -1,12 +1,18 @@
 'use strict';
 
 angular.module('jhipsterApp')
-    .controller('OneToOneDisplayFieldEntityController', function ($scope, OneToOneDisplayFieldEntity) {
+    .controller('OneToOneDisplayFieldEntityController', function ($scope, OneToOneDisplayFieldEntity, ParseLinks) {
         $scope.oneToOneDisplayFieldEntitys = [];
+        $scope.page = 1;
         $scope.loadAll = function() {
-            OneToOneDisplayFieldEntity.query(function(result) {
-               $scope.oneToOneDisplayFieldEntitys = result;
+            OneToOneDisplayFieldEntity.query({page: $scope.page, per_page: 20}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                $scope.oneToOneDisplayFieldEntitys = result;
             });
+        };
+        $scope.loadPage = function(page) {
+            $scope.page = page;
+            $scope.loadAll();
         };
         $scope.loadAll();
 

@@ -26,9 +26,6 @@
                 <constraints unique="true"/>
             </column>
             <column name="onetomanyentity_id" type="bigint"/>
-            <column name="userentity_id" type="bigint">
-                <constraints unique="true"/>
-            </column>
         </createTable>
         
         <addForeignKeyConstraint baseColumnNames="onetooneentity_id"
@@ -65,12 +62,6 @@
                                  constraintName="fk_multirelationalentity_onetomanyentity_id"
                                  referencedColumnNames="id"
                                  referencedTableName="ONETOMANYENTITY"/>
-
-        <addForeignKeyConstraint baseColumnNames="userentity_id"
-                                 baseTableName="MULTIRELATIONALENTITY"
-                                 constraintName="fk_multirelationalentity_userentity_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="JHI_USER"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -3,6 +3,8 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.Application;
 import com.mycompany.myapp.domain.OneToOneDisplayFieldEntity;
 import com.mycompany.myapp.repository.OneToOneDisplayFieldEntityRepository;
+import com.mycompany.myapp.web.rest.dto.OneToOneDisplayFieldEntityDTO;
+import com.mycompany.myapp.web.rest.mapper.OneToOneDisplayFieldEntityMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,6 +49,9 @@ public class OneToOneDisplayFieldEntityResourceTest {
     private OneToOneDisplayFieldEntityRepository oneToOneDisplayFieldEntityRepository;
 
     @Inject
+    private OneToOneDisplayFieldEntityMapper oneToOneDisplayFieldEntityMapper;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     private MockMvc restOneToOneDisplayFieldEntityMockMvc;
@@ -58,6 +63,7 @@ public class OneToOneDisplayFieldEntityResourceTest {
         MockitoAnnotations.initMocks(this);
         OneToOneDisplayFieldEntityResource oneToOneDisplayFieldEntityResource = new OneToOneDisplayFieldEntityResource();
         ReflectionTestUtils.setField(oneToOneDisplayFieldEntityResource, "oneToOneDisplayFieldEntityRepository", oneToOneDisplayFieldEntityRepository);
+        ReflectionTestUtils.setField(oneToOneDisplayFieldEntityResource, "oneToOneDisplayFieldEntityMapper", oneToOneDisplayFieldEntityMapper);
         this.restOneToOneDisplayFieldEntityMockMvc = MockMvcBuilders.standaloneSetup(oneToOneDisplayFieldEntityResource).setMessageConverters(jacksonMessageConverter).build();
     }
 
@@ -73,10 +79,11 @@ public class OneToOneDisplayFieldEntityResourceTest {
         int databaseSizeBeforeCreate = oneToOneDisplayFieldEntityRepository.findAll().size();
 
         // Create the OneToOneDisplayFieldEntity
+        OneToOneDisplayFieldEntityDTO oneToOneDisplayFieldEntityDTO = oneToOneDisplayFieldEntityMapper.oneToOneDisplayFieldEntityToOneToOneDisplayFieldEntityDTO(oneToOneDisplayFieldEntity);
 
         restOneToOneDisplayFieldEntityMockMvc.perform(post("/api/oneToOneDisplayFieldEntitys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(oneToOneDisplayFieldEntity)))
+                .content(TestUtil.convertObjectToJsonBytes(oneToOneDisplayFieldEntityDTO)))
                 .andExpect(status().isCreated());
 
         // Validate the OneToOneDisplayFieldEntity in the database
@@ -133,10 +140,11 @@ public class OneToOneDisplayFieldEntityResourceTest {
         // Update the oneToOneDisplayFieldEntity
         oneToOneDisplayFieldEntity.setDisplayField(UPDATED_DISPLAY_FIELD);
         
+        OneToOneDisplayFieldEntityDTO oneToOneDisplayFieldEntityDTO = oneToOneDisplayFieldEntityMapper.oneToOneDisplayFieldEntityToOneToOneDisplayFieldEntityDTO(oneToOneDisplayFieldEntity);
 
         restOneToOneDisplayFieldEntityMockMvc.perform(put("/api/oneToOneDisplayFieldEntitys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(oneToOneDisplayFieldEntity)))
+                .content(TestUtil.convertObjectToJsonBytes(oneToOneDisplayFieldEntityDTO)))
                 .andExpect(status().isOk());
 
         // Validate the OneToOneDisplayFieldEntity in the database

@@ -3,6 +3,8 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.Application;
 import com.mycompany.myapp.domain.OneToManyEntity;
 import com.mycompany.myapp.repository.OneToManyEntityRepository;
+import com.mycompany.myapp.web.rest.dto.OneToManyEntityDTO;
+import com.mycompany.myapp.web.rest.mapper.OneToManyEntityMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +47,9 @@ public class OneToManyEntityResourceTest {
     private OneToManyEntityRepository oneToManyEntityRepository;
 
     @Inject
+    private OneToManyEntityMapper oneToManyEntityMapper;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     private MockMvc restOneToManyEntityMockMvc;
@@ -56,6 +61,7 @@ public class OneToManyEntityResourceTest {
         MockitoAnnotations.initMocks(this);
         OneToManyEntityResource oneToManyEntityResource = new OneToManyEntityResource();
         ReflectionTestUtils.setField(oneToManyEntityResource, "oneToManyEntityRepository", oneToManyEntityRepository);
+        ReflectionTestUtils.setField(oneToManyEntityResource, "oneToManyEntityMapper", oneToManyEntityMapper);
         this.restOneToManyEntityMockMvc = MockMvcBuilders.standaloneSetup(oneToManyEntityResource).setMessageConverters(jacksonMessageConverter).build();
     }
 
@@ -70,10 +76,11 @@ public class OneToManyEntityResourceTest {
         int databaseSizeBeforeCreate = oneToManyEntityRepository.findAll().size();
 
         // Create the OneToManyEntity
+        OneToManyEntityDTO oneToManyEntityDTO = oneToManyEntityMapper.oneToManyEntityToOneToManyEntityDTO(oneToManyEntity);
 
         restOneToManyEntityMockMvc.perform(post("/api/oneToManyEntitys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(oneToManyEntity)))
+                .content(TestUtil.convertObjectToJsonBytes(oneToManyEntityDTO)))
                 .andExpect(status().isCreated());
 
         // Validate the OneToManyEntity in the database
@@ -126,10 +133,11 @@ public class OneToManyEntityResourceTest {
 
         // Update the oneToManyEntity
         
+        OneToManyEntityDTO oneToManyEntityDTO = oneToManyEntityMapper.oneToManyEntityToOneToManyEntityDTO(oneToManyEntity);
 
         restOneToManyEntityMockMvc.perform(put("/api/oneToManyEntitys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(oneToManyEntity)))
+                .content(TestUtil.convertObjectToJsonBytes(oneToManyEntityDTO)))
                 .andExpect(status().isOk());
 
         // Validate the OneToManyEntity in the database

@@ -7,10 +7,10 @@ angular.module('jhipsterApp').controller('MultiRelationalDisplayFieldEntityDialo
         $scope.multiRelationalDisplayFieldEntity = entity;
         $scope.onetoonedisplayfieldentitys = OneToOneDisplayFieldEntity.query({filter: 'multirelationaldisplayfieldentity-is-null'});
         $q.all([$scope.multiRelationalDisplayFieldEntity.$promise, $scope.onetoonedisplayfieldentitys.$promise]).then(function() {
-            if (!$scope.multiRelationalDisplayFieldEntity.oneToOneDisplayFieldEntity.id) {
+            if (!$scope.multiRelationalDisplayFieldEntity.oneToOneDisplayFieldEntityId) {
                 return $q.reject();
             }
-            return OneToOneDisplayFieldEntity.get({id : $scope.multiRelationalDisplayFieldEntity.oneToOneDisplayFieldEntity.id}).$promise;
+            return OneToOneDisplayFieldEntity.get({id : $scope.multiRelationalDisplayFieldEntity.oneToOneDisplayFieldEntityId}).$promise;
         }).then(function(oneToOneDisplayFieldEntity) {
             $scope.onetoonedisplayfieldentitys.push(oneToOneDisplayFieldEntity);
         });

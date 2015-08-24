@@ -3,6 +3,8 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.Application;
 import com.mycompany.myapp.domain.MultiRelationalDisplayFieldEntity;
 import com.mycompany.myapp.repository.MultiRelationalDisplayFieldEntityRepository;
+import com.mycompany.myapp.web.rest.dto.MultiRelationalDisplayFieldEntityDTO;
+import com.mycompany.myapp.web.rest.mapper.MultiRelationalDisplayFieldEntityMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +47,9 @@ public class MultiRelationalDisplayFieldEntityResourceTest {
     private MultiRelationalDisplayFieldEntityRepository multiRelationalDisplayFieldEntityRepository;
 
     @Inject
+    private MultiRelationalDisplayFieldEntityMapper multiRelationalDisplayFieldEntityMapper;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     private MockMvc restMultiRelationalDisplayFieldEntityMockMvc;
@@ -56,6 +61,7 @@ public class MultiRelationalDisplayFieldEntityResourceTest {
         MockitoAnnotations.initMocks(this);
         MultiRelationalDisplayFieldEntityResource multiRelationalDisplayFieldEntityResource = new MultiRelationalDisplayFieldEntityResource();
         ReflectionTestUtils.setField(multiRelationalDisplayFieldEntityResource, "multiRelationalDisplayFieldEntityRepository", multiRelationalDisplayFieldEntityRepository);
+        ReflectionTestUtils.setField(multiRelationalDisplayFieldEntityResource, "multiRelationalDisplayFieldEntityMapper", multiRelationalDisplayFieldEntityMapper);
         this.restMultiRelationalDisplayFieldEntityMockMvc = MockMvcBuilders.standaloneSetup(multiRelationalDisplayFieldEntityResource).setMessageConverters(jacksonMessageConverter).build();
     }
 
@@ -70,10 +76,11 @@ public class MultiRelationalDisplayFieldEntityResourceTest {
         int databaseSizeBeforeCreate = multiRelationalDisplayFieldEntityRepository.findAll().size();
 
         // Create the MultiRelationalDisplayFieldEntity
+        MultiRelationalDisplayFieldEntityDTO multiRelationalDisplayFieldEntityDTO = multiRelationalDisplayFieldEntityMapper.multiRelationalDisplayFieldEntityToMultiRelationalDisplayFieldEntityDTO(multiRelationalDisplayFieldEntity);
 
         restMultiRelationalDisplayFieldEntityMockMvc.perform(post("/api/multiRelationalDisplayFieldEntitys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(multiRelationalDisplayFieldEntity)))
+                .content(TestUtil.convertObjectToJsonBytes(multiRelationalDisplayFieldEntityDTO)))
                 .andExpect(status().isCreated());
 
         // Validate the MultiRelationalDisplayFieldEntity in the database
@@ -126,10 +133,11 @@ public class MultiRelationalDisplayFieldEntityResourceTest {
 
         // Update the multiRelationalDisplayFieldEntity
         
+        MultiRelationalDisplayFieldEntityDTO multiRelationalDisplayFieldEntityDTO = multiRelationalDisplayFieldEntityMapper.multiRelationalDisplayFieldEntityToMultiRelationalDisplayFieldEntityDTO(multiRelationalDisplayFieldEntity);
 
         restMultiRelationalDisplayFieldEntityMockMvc.perform(put("/api/multiRelationalDisplayFieldEntitys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(multiRelationalDisplayFieldEntity)))
+                .content(TestUtil.convertObjectToJsonBytes(multiRelationalDisplayFieldEntityDTO)))
                 .andExpect(status().isOk());
 
         // Validate the MultiRelationalDisplayFieldEntity in the database

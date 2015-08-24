@@ -4,19 +4,26 @@ import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.MultiRelationalDisplayFieldEntity;
 import com.mycompany.myapp.repository.MultiRelationalDisplayFieldEntityRepository;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
+import com.mycompany.myapp.web.rest.util.PaginationUtil;
+import com.mycompany.myapp.web.rest.dto.MultiRelationalDisplayFieldEntityDTO;
+import com.mycompany.myapp.web.rest.mapper.MultiRelationalDisplayFieldEntityMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing MultiRelationalDisplayFieldEntity.
@@ -30,6 +37,9 @@ public class MultiRelationalDisplayFieldEntityResource {
     @Inject
     private MultiRelationalDisplayFieldEntityRepository multiRelationalDisplayFieldEntityRepository;
 
+    @Inject
+    private MultiRelationalDisplayFieldEntityMapper multiRelationalDisplayFieldEntityMapper;
+
     /**
      * POST  /multiRelationalDisplayFieldEntitys -> Create a new multiRelationalDisplayFieldEntity.
      */
@@ -37,15 +47,16 @@ public class MultiRelationalDisplayFieldEntityResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<MultiRelationalDisplayFieldEntity> create(@RequestBody MultiRelationalDisplayFieldEntity multiRelationalDisplayFieldEntity) throws URISyntaxException {
-        log.debug("REST request to save MultiRelationalDisplayFieldEntity : {}", multiRelationalDisplayFieldEntity);
-        if (multiRelationalDisplayFieldEntity.getId() != null) {
+    public ResponseEntity<MultiRelationalDisplayFieldEntityDTO> create(@RequestBody MultiRelationalDisplayFieldEntityDTO multiRelationalDisplayFieldEntityDTO) throws URISyntaxException {
+        log.debug("REST request to save MultiRelationalDisplayFieldEntity : {}", multiRelationalDisplayFieldEntityDTO);
+        if (multiRelationalDisplayFieldEntityDTO.getId() != null) {
             return ResponseEntity.badRequest().header("Failure", "A new multiRelationalDisplayFieldEntity cannot already have an ID").body(null);
         }
+        MultiRelationalDisplayFieldEntity multiRelationalDisplayFieldEntity = multiRelationalDisplayFieldEntityMapper.multiRelationalDisplayFieldEntityDTOToMultiRelationalDisplayFieldEntity(multiRelationalDisplayFieldEntityDTO);
         MultiRelationalDisplayFieldEntity result = multiRelationalDisplayFieldEntityRepository.save(multiRelationalDisplayFieldEntity);
         return ResponseEntity.created(new URI("/api/multiRelationalDisplayFieldEntitys/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert("multiRelationalDisplayFieldEntity", result.getId().toString()))
-                .body(result);
+                .body(multiRelationalDisplayFieldEntityMapper.multiRelationalDisplayFieldEntityToMultiRelationalDisplayFieldEntityDTO(result));
     }
 
     /**
@@ -55,15 +66,16 @@ public class MultiRelationalDisplayFieldEntityResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<MultiRelationalDisplayFieldEntity> update(@RequestBody MultiRelationalDisplayFieldEntity multiRelationalDisplayFieldEntity) throws URISyntaxException {
-        log.debug("REST request to update MultiRelationalDisplayFieldEntity : {}", multiRelationalDisplayFieldEntity);
-        if (multiRelationalDisplayFieldEntity.getId() == null) {
-            return create(multiRelationalDisplayFieldEntity);
+    public ResponseEntity<MultiRelationalDisplayFieldEntityDTO> update(@RequestBody MultiRelationalDisplayFieldEntityDTO multiRelationalDisplayFieldEntityDTO) throws URISyntaxException {
+        log.debug("REST request to update MultiRelationalDisplayFieldEntity : {}", multiRelationalDisplayFieldEntityDTO);
+        if (multiRelationalDisplayFieldEntityDTO.getId() == null) {
+            return create(multiRelationalDisplayFieldEntityDTO);
         }
+        MultiRelationalDisplayFieldEntity multiRelationalDisplayFieldEntity = multiRelationalDisplayFieldEntityMapper.multiRelationalDisplayFieldEntityDTOToMultiRelationalDisplayFieldEntity(multiRelationalDisplayFieldEntityDTO);
         MultiRelationalDisplayFieldEntity result = multiRelationalDisplayFieldEntityRepository.save(multiRelationalDisplayFieldEntity);
         return ResponseEntity.ok()
-                .headers(HeaderUtil.createEntityUpdateAlert("multiRelationalDisplayFieldEntity", multiRelationalDisplayFieldEntity.getId().toString()))
-                .body(result);
+                .headers(HeaderUtil.createEntityUpdateAlert("multiRelationalDisplayFieldEntity", multiRelationalDisplayFieldEntityDTO.getId().toString()))
+                .body(multiRelationalDisplayFieldEntityMapper.multiRelationalDisplayFieldEntityToMultiRelationalDisplayFieldEntityDTO(result));
     }
 
     /**
@@ -73,9 +85,15 @@ public class MultiRelationalDisplayFieldEntityResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<MultiRelationalDisplayFieldEntity> getAll() {
-        log.debug("REST request to get all MultiRelationalDisplayFieldEntitys");
-        return multiRelationalDisplayFieldEntityRepository.findAllWithEagerRelationships();
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<MultiRelationalDisplayFieldEntityDTO>> getAll(@RequestParam(value = "page" , required = false) Integer offset,
+                                  @RequestParam(value = "per_page", required = false) Integer limit)
+        throws URISyntaxException {
+        Page<MultiRelationalDisplayFieldEntity> page = multiRelationalDisplayFieldEntityRepository.findAll(PaginationUtil.generatePageRequest(offset, limit));
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/multiRelationalDisplayFieldEntitys", offset, limit);
+        return new ResponseEntity<>(page.getContent().stream()
+            .map(multiRelationalDisplayFieldEntityMapper::multiRelationalDisplayFieldEntityToMultiRelationalDisplayFieldEntityDTO)
+            .collect(Collectors.toCollection(LinkedList::new)), headers, HttpStatus.OK);
     }
 
     /**
@@ -85,11 +103,12 @@ public class MultiRelationalDisplayFieldEntityResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<MultiRelationalDisplayFieldEntity> get(@PathVariable Long id) {
+    public ResponseEntity<MultiRelationalDisplayFieldEntityDTO> get(@PathVariable Long id) {
         log.debug("REST request to get MultiRelationalDisplayFieldEntity : {}", id);
         return Optional.ofNullable(multiRelationalDisplayFieldEntityRepository.findOneWithEagerRelationships(id))
-            .map(multiRelationalDisplayFieldEntity -> new ResponseEntity<>(
-                multiRelationalDisplayFieldEntity,
+            .map(multiRelationalDisplayFieldEntityMapper::multiRelationalDisplayFieldEntityToMultiRelationalDisplayFieldEntityDTO)
+            .map(multiRelationalDisplayFieldEntityDTO -> new ResponseEntity<>(
+                multiRelationalDisplayFieldEntityDTO,
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

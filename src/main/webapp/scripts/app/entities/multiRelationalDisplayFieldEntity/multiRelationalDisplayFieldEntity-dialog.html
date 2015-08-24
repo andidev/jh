@@ -17,7 +17,7 @@
         <div class="form-group">
             <label translate="jhipsterApp.multiRelationalDisplayFieldEntity.oneToOneDisplayFieldEntity" for="field_oneToOneDisplayFieldEntity">oneToOneDisplayFieldEntity</label>
             
-            <select class="form-control" id="field_oneToOneDisplayFieldEntity" name="oneToOneDisplayFieldEntity" ng-model="multiRelationalDisplayFieldEntity.oneToOneDisplayFieldEntity" ng-options="oneToOneDisplayFieldEntity as oneToOneDisplayFieldEntity.displayField for oneToOneDisplayFieldEntity in onetoonedisplayfieldentitys | orderBy:'id' track by oneToOneDisplayFieldEntity.id">
+            <select class="form-control" id="field_oneToOneDisplayFieldEntity" name="oneToOneDisplayFieldEntity" ng-model="multiRelationalDisplayFieldEntity.oneToOneDisplayFieldEntityId" ng-options="oneToOneDisplayFieldEntity.id as oneToOneDisplayFieldEntity.displayField for oneToOneDisplayFieldEntity in onetoonedisplayfieldentitys | orderBy:'id'">
                 <option value=""></option>
             </select>
             
@@ -29,7 +29,7 @@
         <div class="form-group">
             <label translate="jhipsterApp.multiRelationalDisplayFieldEntity.oneToManyDisplayFieldEntity" for="field_oneToManyDisplayFieldEntity">oneToManyDisplayFieldEntity</label>
             
-            <select class="form-control" id="field_oneToManyDisplayFieldEntity" name="oneToManyDisplayFieldEntity" ng-model="multiRelationalDisplayFieldEntity.oneToManyDisplayFieldEntity" ng-options="oneToManyDisplayFieldEntity as oneToManyDisplayFieldEntity.displayField for oneToManyDisplayFieldEntity in onetomanydisplayfieldentitys track by oneToManyDisplayFieldEntity.id">
+            <select class="form-control" id="field_oneToManyDisplayFieldEntity" name="oneToManyDisplayFieldEntity" ng-model="multiRelationalDisplayFieldEntity.oneToManyDisplayFieldEntityId" ng-options="oneToManyDisplayFieldEntity.id as oneToManyDisplayFieldEntity.displayField for oneToManyDisplayFieldEntity in onetomanydisplayfieldentitys">
                 <option value=""></option>
             </select>
             

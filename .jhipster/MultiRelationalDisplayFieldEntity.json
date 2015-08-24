@@ -30,6 +30,6 @@
   ],
   "fields": [],
   "changelogDate": "20150822180549",
-  "dto": "no",
-  "pagination": "no"
+  "dto": "mapstruct",
+  "pagination": "pagination"
 }

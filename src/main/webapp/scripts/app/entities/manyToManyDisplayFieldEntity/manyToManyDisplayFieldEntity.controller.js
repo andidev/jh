@@ -1,12 +1,18 @@
 'use strict';
 
 angular.module('jhipsterApp')
-    .controller('ManyToManyDisplayFieldEntityController', function ($scope, ManyToManyDisplayFieldEntity) {
+    .controller('ManyToManyDisplayFieldEntityController', function ($scope, ManyToManyDisplayFieldEntity, ParseLinks) {
         $scope.manyToManyDisplayFieldEntitys = [];
+        $scope.page = 1;
         $scope.loadAll = function() {
-            ManyToManyDisplayFieldEntity.query(function(result) {
-               $scope.manyToManyDisplayFieldEntitys = result;
+            ManyToManyDisplayFieldEntity.query({page: $scope.page, per_page: 20}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                $scope.manyToManyDisplayFieldEntitys = result;
             });
+        };
+        $scope.loadPage = function(page) {
+            $scope.page = page;
+            $scope.loadAll();
         };
         $scope.loadAll();
 

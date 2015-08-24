@@ -1,12 +1,18 @@
 'use strict';
 
 angular.module('jhipsterApp')
-    .controller('OneToManyEntityController', function ($scope, OneToManyEntity) {
+    .controller('OneToManyEntityController', function ($scope, OneToManyEntity, ParseLinks) {
         $scope.oneToManyEntitys = [];
+        $scope.page = 1;
         $scope.loadAll = function() {
-            OneToManyEntity.query(function(result) {
-               $scope.oneToManyEntitys = result;
+            OneToManyEntity.query({page: $scope.page, per_page: 20}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                $scope.oneToManyEntitys = result;
             });
+        };
+        $scope.loadPage = function(page) {
+            $scope.page = page;
+            $scope.loadAll();
         };
         $scope.loadAll();
 
