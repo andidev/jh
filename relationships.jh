@@ -20,8 +20,15 @@ relationship OneToOne{
 relationship ManyToMany{
   MultiRelationalEntity{manyToManyEntity} to ManyToManyEntity{multiRelationalEntity}
 }
+
 relationship ManyToOne{
-  MultiRelationalEntity{userEntity} to User{multiRelationalEntity}
+  OneToManyEntity{userEntity(login)} to User{oneToMany}
+}
+relationship OneToOne{
+  OneToOneEntity{userEntity(login)} to User{oneToOne}
+}
+relationship ManyToMany{
+  ManyToManyEntity{userEntity(login)} to User{manyToMany}
 }
 
 
