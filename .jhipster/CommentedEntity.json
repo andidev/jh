@@ -5,17 +5,20 @@
             "relationshipName": "commentedRelationship",
             "otherEntityName": "commentedRelationship",
             "relationshipType": "one-to-many",
-            "otherEntityRelationshipName": "commentedEntity"
+            "otherEntityRelationshipName": "commentedEntity",
+            "javadoc": "This is a comment on a relationship"
         }
     ],
     "fields": [
         {
             "fieldId": 1,
             "fieldName": "commentedField",
-            "fieldType": "String"
+            "fieldType": "String",
+            "javadoc": "This is a comment on a field"
         }
     ],
     "changelogDate": "20150829175308",
     "dto": "no",
-    "pagination": "no"
+    "pagination": "no",
+    "javadoc": "This is a comment on a class"
 }
