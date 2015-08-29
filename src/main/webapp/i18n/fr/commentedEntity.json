@@ -1,0 +1,20 @@
+{
+    "jhipsterApp": {
+        "commentedEntity" : {
+            "home": {
+                "title": "CommentedEntitys",
+                "createLabel": "Créer un nouveau CommentedEntity",
+                "createOrEditLabel": "Créer ou éditer un CommentedEntity"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le CommentedEntity {{ id }} ?"
+            },
+            "detail": {
+                "title": "CommentedEntity"
+            },
+            "commentedField": "CommentedField",
+            "commentedRelationship": "CommentedRelationship"
+        }
+    }
+}
+

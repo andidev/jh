@@ -1,0 +1,21 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "commentedRelationship",
+            "otherEntityName": "commentedRelationship",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "commentedEntity"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "commentedField",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20150829175308",
+    "dto": "no",
+    "pagination": "no"
+}
