@@ -19,7 +19,6 @@
             },
             "admin": {
                 "main": "Administration",
-                "userManagement": "Gestion utilisateur",
                 "tracker": "Suivi des utilisateurs",
                 "metrics": "Métriques",
                 "health": "Diagnostics",

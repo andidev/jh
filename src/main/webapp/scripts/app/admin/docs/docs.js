@@ -14,6 +14,11 @@ angular.module('jhipsterApp')
                     'content@': {
                         templateUrl: 'scripts/app/admin/docs/docs.html'
                     }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', function ($translate) {
+                        return $translate.refresh();
+                    }]
                 }
             });
     });
