@@ -6,8 +6,6 @@
             "home": "Accueil",
             "entities": {
                 "main": "Entités",
-                "imageEntity": "ImageEntity",
-                "one": "One",
                 "additionalEntity": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
