@@ -64,11 +64,10 @@ angular.module('jhipsterApp').controller('OneDialogController',
             return formatAsBytes(size(base64String));
         };
 
-        $scope.setImage = function ($files, one) {
-            if ($files[0]) {
-                var file = $files[0];
+        $scope.setImage = function ($file, one) {
+            if ($file) {
                 var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
+                fileReader.readAsDataURL($file);
                 fileReader.onload = function (e) {
                     var data = e.target.result;
                     var base64Data = data.substr(data.indexOf('base64,') + 'base64,'.length);

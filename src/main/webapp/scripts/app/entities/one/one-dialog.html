@@ -14,7 +14,7 @@
                     ng-model="one.id" readonly>
         </div>
 
-        <div class="form-group" ngf-drop ngf-change="setImage($files, one)" ngf-accept="'image/*'">
+        <div class="form-group" ngf-drop ngf-change="setImage($file, one)" ngf-accept="'image/*'">
             <label translate="jhipsterApp.one.image" for="field_image">Image</label>
             <div>
                 <img data-ng-src="{{'data:image/*;base64,' + one.image}}" style="max-height: 100px;" ng-if="one.image"/>
@@ -27,7 +27,7 @@
                     </button>
                 </div>
                 <button type="file" ngf-select class="btn btn-default btn-block"
-                        ngf-change="setImage($files, one)" accept="image/*" translate="entity.action.addimage">
+                        ngf-change="setImage($file, one)" accept="image/*" translate="entity.action.addimage">
                     Add image
                 </button>
             </div>
