@@ -1,0 +1,21 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image",
+            "fieldValidateRules": [
+                "required",
+                "minbytes",
+                "maxbytes"
+            ],
+            "fieldValidateRulesMinbytes": "6000",
+            "fieldValidateRulesMaxbytes": "10000"
+        }
+    ],
+    "changelogDate": "20150830125045",
+    "dto": "no",
+    "pagination": "no"
+}

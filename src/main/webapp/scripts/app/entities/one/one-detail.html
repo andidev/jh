@@ -1,0 +1,30 @@
+
+<div>
+    <h2><span translate="jhipsterApp.one.detail.title">One</span> {{one.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="jhipsterApp.one.image">Image</span>
+                </td>
+                <td>
+                    <img data-ng-src="{{'data:image/*;base64,' + one.image}}" style="max-width: 100%;" ng-if="one.image"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>
