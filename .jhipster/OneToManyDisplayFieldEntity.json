@@ -17,6 +17,6 @@
     }
   ],
   "changelogDate": "20150822180549",
-  "dto": "mapstruct",
+  "dto": "no",
   "pagination": "pagination"
 }

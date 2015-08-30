@@ -8,10 +8,20 @@
       "relationshipType": "one-to-one",
       "ownerSide": false,
       "otherEntityRelationshipName": "oneToOneEntity"
+    },
+    {
+      "relationshipId": 2,
+      "relationshipName": "userEntity",
+      "relationshipFieldName": "userEntity",
+      "otherEntityName": "user",
+      "relationshipType": "one-to-one",
+      "otherEntityRelationshipName": "oneToOne",
+      "otherEntityField": "login",
+      "ownerSide": true
     }
   ],
   "fields": [],
   "changelogDate": "20150822180549",
-  "dto": "mapstruct",
+  "dto": "no",
   "pagination": "pagination"
 }
