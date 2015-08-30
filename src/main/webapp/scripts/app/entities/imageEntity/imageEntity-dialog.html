@@ -1,0 +1,147 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myImageEntityLabel" translate="jhipsterApp.imageEntity.home.createOrEditLabel">Create or edit a ImageEntity</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="imageEntity.id" readonly>
+        </div>
+
+        <div class="form-group" ngf-drop ngf-change="setImageField($files, imageEntity)" ngf-accept="'image/*'">
+            <label translate="jhipsterApp.imageEntity.imageField" for="field_imageField">ImageField</label>
+            <div>
+                <img data-ng-src="{{'data:image/*;base64,' + imageEntity.imageField}}" style="max-height: 100px;" ng-if="imageEntity.imageField"/>
+                <div class="help-block clearfix">
+                    <span class="pull-left">{{byteSize(imageEntity.imageField)}}</span>
+                    <button ng-click="imageEntity.imageField=null"
+                            ng-if="imageEntity.imageField"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="file" ngf-select class="btn btn-default btn-block"
+                        ngf-change="setImageField($files, imageEntity)" accept="image/*" translate="entity.action.addimage">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="imageField" id="field_imageField"
+                    ng-model="imageEntity.imageField"
+                    >
+
+        </div>
+        <div class="form-group" ngf-drop ngf-change="setValidatedImageField($files, imageEntity)" ngf-accept="'image/*'">
+            <label translate="jhipsterApp.imageEntity.validatedImageField" for="field_validatedImageField">ValidatedImageField</label>
+            <div>
+                <img data-ng-src="{{'data:image/*;base64,' + imageEntity.validatedImageField}}" style="max-height: 100px;" ng-if="imageEntity.validatedImageField"/>
+                <div class="help-block clearfix">
+                    <span class="pull-left">{{byteSize(imageEntity.validatedImageField)}}</span>
+                    <button ng-click="imageEntity.validatedImageField=null"
+                            ng-if="imageEntity.validatedImageField"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="file" ngf-select class="btn btn-default btn-block"
+                        ngf-change="setValidatedImageField($files, imageEntity)" accept="image/*" translate="entity.action.addimage">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="validatedImageField" id="field_validatedImageField"
+                    ng-model="imageEntity.validatedImageField"
+                    required minbytes="100" maxbytes="5000000">
+
+            <div ng-show="editForm.validatedImageField.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.validatedImageField.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.validatedImageField.$error.minbytes" translate="entity.validation.minbytes" translate-value-min="100">
+                    This field should be more than 100.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.validatedImageField.$error.maxbytes" translate="entity.validation.maxbytes" translate-value-max="5000000">
+                    This field cannot be more than 5000000.
+                </p>
+            </div>
+        </div>
+        <div class="form-group" ngf-drop ngf-change="setBlobField($files, imageEntity)">
+            <label translate="jhipsterApp.imageEntity.blobField" for="field_blobField">BlobField</label>
+            <div>
+                <div class="help-block clearfix">
+                    <span class="pull-left">{{abbreviate(imageEntity.blobField) + ' ' + byteSize(imageEntity.blobField)}}</span>
+                    <button ng-click="imageEntity.blobField=null"
+                            ng-if="imageEntity.blobField"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="file" ngf-select class="btn btn-default btn-block"
+                        ngf-change="setBlobField($files, imageEntity)" translate="entity.action.addblob">
+                    Add blob
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="blobField" id="field_blobField"
+                    ng-model="imageEntity.blobField"
+                    >
+
+        </div>
+        <div class="form-group" ngf-drop ngf-change="setValidatedBlobField($files, imageEntity)">
+            <label translate="jhipsterApp.imageEntity.validatedBlobField" for="field_validatedBlobField">ValidatedBlobField</label>
+            <div>
+                <div class="help-block clearfix">
+                    <span class="pull-left">{{abbreviate(imageEntity.validatedBlobField) + ' ' + byteSize(imageEntity.validatedBlobField)}}</span>
+                    <button ng-click="imageEntity.validatedBlobField=null"
+                            ng-if="imageEntity.validatedBlobField"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="file" ngf-select class="btn btn-default btn-block"
+                        ngf-change="setValidatedBlobField($files, imageEntity)" translate="entity.action.addblob">
+                    Add blob
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="validatedBlobField" id="field_validatedBlobField"
+                    ng-model="imageEntity.validatedBlobField"
+                    required minbytes="0" maxbytes="5000000">
+
+            <div ng-show="editForm.validatedBlobField.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.validatedBlobField.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.validatedBlobField.$error.minbytes" translate="entity.validation.minbytes" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.validatedBlobField.$error.maxbytes" translate="entity.validation.maxbytes" translate-value-max="5000000">
+                    This field cannot be more than 5000000.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label translate="jhipsterApp.imageEntity.stringField" for="field_stringField">StringField</label>
+            <input type="text" class="form-control" name="stringField" id="field_stringField"
+                    ng-model="imageEntity.stringField"
+                    >
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
