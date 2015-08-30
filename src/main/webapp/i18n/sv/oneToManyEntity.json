@@ -1,0 +1,18 @@
+{
+    "jhipsterApp": {
+        "oneToManyEntity" : {
+            "home": {
+                "title": "OneToManyEntitys",
+                "createLabel": "Skapa en ny OneToManyEntity",
+                "createOrEditLabel": "Skapa eller ändra en OneToManyEntity"
+            },
+            "delete": {
+                "question": "Är du säker på att du vill ta bort OneToManyEntity {{ id }}?"
+            },
+            "detail": {
+                "title": "OneToManyEntity"
+            },
+            "multiRelationalEntity": "MultiRelationalEntity"
+        }
+    }
+}

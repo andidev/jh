@@ -1,0 +1,19 @@
+{
+    "jhipsterApp": {
+        "manyToManyDisplayFieldEntity" : {
+            "home": {
+                "title": "ManyToManyDisplayFieldEntitys",
+                "createLabel": "Skapa en ny ManyToManyDisplayFieldEntity",
+                "createOrEditLabel": "Skapa eller ändra en ManyToManyDisplayFieldEntity"
+            },
+            "delete": {
+                "question": "Är du säker på att du vill ta bort ManyToManyDisplayFieldEntity {{ id }}?"
+            },
+            "detail": {
+                "title": "ManyToManyDisplayFieldEntity"
+            },
+            "displayField": "DisplayField",
+            "multiRelationalDisplayFieldEntity": "MultiRelationalDisplayFieldEntity"
+        }
+    }
+}

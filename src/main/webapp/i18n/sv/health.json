@@ -1,0 +1,20 @@
+{
+    "health": {
+        "title": "Statuskontroller",
+        "refresh.button": "Uppdatera",
+        "stacktrace": "Stacktrace",
+        "indicator": {
+            "diskSpace": "Disk space",
+            "mail": "E-post",
+            "db": "Databas"
+        },
+        "table": {
+            "service": "Service namn",
+            "status": "Status"
+        },
+        "status": {
+            "UP": "UPP",
+            "DOWN": "NED"
+        }
+    }
+}
