@@ -14,7 +14,7 @@
                     ng-model="one.id" readonly>
         </div>
 
-        <div class="form-group" ngf-drop ngf-change="setImage($file, one)" ngf-accept="'image/*'">
+        <div class="form-group" ngf-drop ngf-change="setImage($file, one)" name="imageNgf">
             <label translate="jhipsterApp.one.image" for="field_image">Image</label>
             <div>
                 <img data-ng-src="{{'data:image/*;base64,' + one.image}}" style="max-height: 100px;" ng-if="one.image"/>
@@ -26,29 +26,28 @@
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </div>
-                <button type="file" ngf-select class="btn btn-default btn-block"
-                        ngf-change="setImage($file, one)" accept="image/*" translate="entity.action.addimage">
+                <button type="file" ngf-select ngf-change="setImage($file, one)" class="btn btn-default btn-block" name="imageNgf"
+                        accept="images/*" ngf-min-size="6000" ngf-max-size="10000" ng-model="one.imageNgf" translate="entity.action.addimage">
                     Add image
                 </button>
             </div>
             <input type="hidden" class="form-control" name="image" id="field_image"
-                    ng-model="one.image"
-                    required minbytes="6000" maxbytes="10000">
+                    ng-model="one.image">
 
-            <div ng-show="editForm.image.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.image.$error.required" translate="entity.validation.required">
+                    ng-show="editForm.imageNgf.$error.required" translate="entity.validation.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                   ng-show="editForm.image.$error.minbytes" translate="entity.validation.minbytes" translate-value-min="6000">
+                   ng-show="editForm.imageNgf.$error.minSize" translate="entity.validation.minbytes" translate-value-min="6000">
                     This field should be more than 6000.
                 </p>
                 <p class="help-block"
-                   ng-show="editForm.image.$error.maxbytes" translate="entity.validation.maxbytes" translate-value-max="10000">
+                   ng-show="editForm.imageNgf.$error.maxSize" translate="entity.validation.maxbytes" translate-value-max="10000">
                     This field cannot be more than 10000.
                 </p>
-            </div>
+            <pre>{{one.imageNgf}}</pre>
+            <pre>{{editForm.imageNgf}}</pre>
         </div>
     </div>
     <div class="modal-footer">

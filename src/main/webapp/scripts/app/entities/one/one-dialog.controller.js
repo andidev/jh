@@ -65,6 +65,8 @@ angular.module('jhipsterApp').controller('OneDialogController',
         };
 
         $scope.setImage = function ($file, one) {
+            console.log('imageNgf = ', $scope.imageNgf);
+
             if ($file) {
                 var fileReader = new FileReader();
                 fileReader.readAsDataURL($file);
@@ -77,4 +79,7 @@ angular.module('jhipsterApp').controller('OneDialogController',
                 };
             }
         };
+            $scope.printModel = function () {
+                console.log('imageNgf = ', $scope.imageNgf);
+            };
 }]);
