@@ -1,0 +1,23 @@
+{
+    "jhipsterApp": {
+        "imageEntity" : {
+            "home": {
+                "title": "ImageEntitys",
+                "createLabel": "Créer un nouveau ImageEntity",
+                "createOrEditLabel": "Créer ou éditer un ImageEntity"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le ImageEntity {{ id }} ?"
+            },
+            "detail": {
+                "title": "ImageEntity"
+            },
+            "imageField": "ImageField",
+            "validatedImageField": "ValidatedImageField",
+            "blobField": "BlobField",
+            "validatedBlobField": "ValidatedBlobField",
+            "stringField": "StringField"
+        }
+    }
+}
+
