@@ -27,7 +27,7 @@ public class ImageEntity implements Serializable {
     private byte[] imageField;
 
     @NotNull
-    @Size(min = 100, max = 5000000)        
+    @Size(min = 6000, max = 10000)        
     @Lob
     @Column(name = "validated_image_field", nullable = false)
     private byte[] validatedImageField;
@@ -37,7 +37,7 @@ public class ImageEntity implements Serializable {
     private byte[] blobField;
 
     @NotNull
-    @Size(min = 0, max = 5000000)        
+    @Size(min = 6000, max = 10000)        
     @Lob
     @Column(name = "validated_blob_field", nullable = false)
     private byte[] validatedBlobField;

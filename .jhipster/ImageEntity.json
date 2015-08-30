@@ -17,8 +17,8 @@
                 "minbytes",
                 "maxbytes"
             ],
-            "fieldValidateRulesMinbytes": "100",
-            "fieldValidateRulesMaxbytes": 5000000
+            "fieldValidateRulesMinbytes": 6000,
+            "fieldValidateRulesMaxbytes": 10000
         },
         {
             "fieldId": 3,
@@ -36,8 +36,8 @@
                 "minbytes",
                 "maxbytes"
             ],
-            "fieldValidateRulesMinbytes": 0,
-            "fieldValidateRulesMaxbytes": 5000000
+            "fieldValidateRulesMinbytes": 6000,
+            "fieldValidateRulesMaxbytes": 10000
         },
         {
             "fieldId": 5,

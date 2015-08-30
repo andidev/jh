@@ -45,14 +45,14 @@ public class ImageEntityResourceTest {
     private static final byte[] DEFAULT_IMAGE_FIELD = TestUtil.createByteArray(1, "0");
     private static final byte[] UPDATED_IMAGE_FIELD = TestUtil.createByteArray(2, "1");
 
-    private static final byte[] DEFAULT_VALIDATED_IMAGE_FIELD = TestUtil.createByteArray(100, "0");
-    private static final byte[] UPDATED_VALIDATED_IMAGE_FIELD = TestUtil.createByteArray(5000000, "1");
+    private static final byte[] DEFAULT_VALIDATED_IMAGE_FIELD = TestUtil.createByteArray(6000, "0");
+    private static final byte[] UPDATED_VALIDATED_IMAGE_FIELD = TestUtil.createByteArray(10000, "1");
 
     private static final byte[] DEFAULT_BLOB_FIELD = TestUtil.createByteArray(1, "0");
     private static final byte[] UPDATED_BLOB_FIELD = TestUtil.createByteArray(2, "1");
 
-    private static final byte[] DEFAULT_VALIDATED_BLOB_FIELD = TestUtil.createByteArray(0, "0");
-    private static final byte[] UPDATED_VALIDATED_BLOB_FIELD = TestUtil.createByteArray(5000000, "1");
+    private static final byte[] DEFAULT_VALIDATED_BLOB_FIELD = TestUtil.createByteArray(6000, "0");
+    private static final byte[] UPDATED_VALIDATED_BLOB_FIELD = TestUtil.createByteArray(10000, "1");
     private static final String DEFAULT_STRING_FIELD = "SAMPLE_TEXT";
     private static final String UPDATED_STRING_FIELD = "UPDATED_TEXT";
 
