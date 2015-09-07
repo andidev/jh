@@ -1,0 +1,22 @@
+{
+    "jhipsterApp": {
+        "oneToManyDisplayFieldEntity" : {
+            "home": {
+                "title": "OneToManyDisplayFieldEntitys",
+                "createLabel": "Create a new OneToManyDisplayFieldEntity",
+                "createOrEditLabel": "Create or edit a OneToManyDisplayFieldEntity"
+            },
+            "created": "A new OneToManyDisplayFieldEntity is created with identifier {{ param }}",
+            "updated": "A OneToManyDisplayFieldEntity is updated with identifier {{ param }}",
+            "deleted": "A OneToManyDisplayFieldEntity is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete OneToManyDisplayFieldEntity {{ id }}?"
+            },
+            "detail": {
+                "title": "OneToManyDisplayFieldEntity"
+            },
+            "displayField": "DisplayField",
+            "multiRelationalDisplayFieldEntity": "MultiRelationalDisplayFieldEntity"
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "jhipsterApp": {
+        "fieldEntity" : {
+            "home": {
+                "title": "FieldEntitys",
+                "createLabel": "Créer un nouveau FieldEntity",
+                "createOrEditLabel": "Créer ou éditer un FieldEntity"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le FieldEntity {{ id }} ?"
+            },
+            "detail": {
+                "title": "FieldEntity"
+            },
+            "name": "Name",
+            "email": "Email",
+            "aDouble": "ADouble",
+            "aRequiredDouble": "ARequiredDouble",
+            "anEnum": "AnEnum"
+        }
+    }
+}
+

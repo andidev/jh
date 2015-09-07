@@ -6,6 +6,15 @@
             "home": "Home",
             "entities": {
                 "main": "Entities",
+                "oneToOneDisplayFieldEntity": "OneToOneDisplayFieldEntity",
+                "oneToManyDisplayFieldEntity": "OneToManyDisplayFieldEntity",
+                "manyToManyDisplayFieldEntity": "ManyToManyDisplayFieldEntity",
+                "oneToOneEntity": "OneToOneEntity",
+                "oneToManyEntity": "OneToManyEntity",
+                "manyToManyEntity": "ManyToManyEntity",
+                "multiRelationalDisplayFieldEntity": "MultiRelationalDisplayFieldEntity",
+                "multiRelationalEntity": "MultiRelationalEntity",
+                "fieldEntity": "FieldEntity",
                 "additionalEntity": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

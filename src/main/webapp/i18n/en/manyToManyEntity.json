@@ -1,0 +1,22 @@
+{
+    "jhipsterApp": {
+        "manyToManyEntity" : {
+            "home": {
+                "title": "ManyToManyEntitys",
+                "createLabel": "Create a new ManyToManyEntity",
+                "createOrEditLabel": "Create or edit a ManyToManyEntity"
+            },
+            "created": "A new ManyToManyEntity is created with identifier {{ param }}",
+            "updated": "A ManyToManyEntity is updated with identifier {{ param }}",
+            "deleted": "A ManyToManyEntity is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete ManyToManyEntity {{ id }}?"
+            },
+            "detail": {
+                "title": "ManyToManyEntity"
+            },
+            "multiRelationalEntity": "MultiRelationalEntity",
+            "userEntity": "UserEntity"
+        }
+    }
+}

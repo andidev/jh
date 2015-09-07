@@ -1,3 +1,13 @@
+entity FieldEntity{
+    name String,
+    email String required maxlength(30) minlength(5),
+    aDouble Double,
+    aRequiredDouble Double required,
+    anEnum Language
+}
+enum Language {
+    FRENCH, ENGLISH, SPANISH
+}
 entity MultiRelationalEntity{
 }
 entity OneToOneEntity{
