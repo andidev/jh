@@ -132,10 +132,17 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
+    public User getUserWithAuthorities(Long id) {
+        User user = userRepository.findOne(id);
+        user.getAuthorities().size(); // eagerly load the association
+        return user;
+    }
+
+    @Transactional(readOnly = true)
     public User getUserWithAuthorities() {
-        User currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin()).get();
-        currentUser.getAuthorities().size(); // eagerly load the association
-        return currentUser;
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin()).get();
+        user.getAuthorities().size(); // eagerly load the association
+        return user;
     }
 
     /**

@@ -6,15 +6,6 @@
             "home": "Accueil",
             "entities": {
                 "main": "Entités",
-                "oneToOneDisplayFieldEntity": "OneToOneDisplayFieldEntity",
-                "oneToManyDisplayFieldEntity": "OneToManyDisplayFieldEntity",
-                "manyToManyDisplayFieldEntity": "ManyToManyDisplayFieldEntity",
-                "oneToOneEntity": "OneToOneEntity",
-                "oneToManyEntity": "OneToManyEntity",
-                "manyToManyEntity": "ManyToManyEntity",
-                "multiRelationalDisplayFieldEntity": "MultiRelationalDisplayFieldEntity",
-                "multiRelationalEntity": "MultiRelationalEntity",
-                "fieldEntity": "FieldEntity",
                 "additionalEntity": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -28,6 +19,7 @@
             },
             "admin": {
                 "main": "Administration",
+                "user-management": "Gestion utilisateur",
                 "tracker": "Suivi des utilisateurs",
                 "metrics": "Métriques",
                 "health": "Diagnostics",
@@ -78,7 +70,7 @@
             }
         },
         "field": {
-            "id" : "ID"
+            "id": "ID"
         }
     },
     "entity": {
