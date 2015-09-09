@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('jhipsterApp')
-    .controller('user-managementController', function ($scope, User, ParseLinks, Language) {
+    .controller('UserManagementController', function ($scope, User, ParseLinks, Language) {
         $scope.users = [];
-        $scope.authorities = ["ROLE_USER", "ROLE_ADMIN"];
+        $scope.roles = ["ROLE_USER", "ROLE_ADMIN"];
         Language.getAll().then(function (languages) {
             $scope.languages = languages;
         });
@@ -55,7 +55,7 @@ angular.module('jhipsterApp')
                 id: null, login: null, firstName: null, lastName: null, email: null,
                 activated: null, langKey: null, createdBy: null, createdDate: null,
                 lastModifiedBy: null, lastModifiedDate: null, resetDate: null,
-                resetKey: null, authorities: null
+                resetKey: null, roles: null
             };
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();

@@ -1,9 +1,11 @@
 package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.mycompany.myapp.domain.Authority;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.security.AuthoritiesConstants;
+import com.mycompany.myapp.web.rest.dto.UserDTO;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import com.mycompany.myapp.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -14,13 +16,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing users.
@@ -41,7 +45,7 @@ public class UserResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @RolesAllowed(AuthoritiesConstants.ADMIN)
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<User> createUser(@RequestBody User user) throws URISyntaxException {
         log.debug("REST request to save User : {}", user);
         if (user.getId() != null) {
@@ -60,7 +64,7 @@ public class UserResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @RolesAllowed(AuthoritiesConstants.ADMIN)
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<User> updateUser(@RequestBody User user) throws URISyntaxException {
         log.debug("REST request to update User : {}", user);
         if (user.getId() == null) {
@@ -79,11 +83,25 @@ public class UserResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<User>> getAllUsers(Pageable pageable)
+    @Transactional
+    public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable)
         throws URISyntaxException {
         Page<User> page = userRepository.findAll(pageable);
+        List<UserDTO> userDTOs = page.getContent().stream().map(user -> {
+            return new UserDTO(
+                user.getLogin(),
+                null,
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getActivated(),
+                user.getLangKey(),
+                user.getAuthorities().stream().map(Authority::getName)
+                    .collect(Collectors.toList()));
+        }).collect(Collectors.toList());
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(userDTOs, headers, HttpStatus.OK);
     }
 
     /**

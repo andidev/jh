@@ -24,6 +24,11 @@ mail:
     from: jhipster@localhost
 
 
+spring:
+    mvc:
+        favicon:
+            enabled: false
+
 swagger:
     title: jhipster API
     description: jhipster applications and beyond!
