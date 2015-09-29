@@ -10,11 +10,11 @@ angular.module('jhipsterApp')
                 AuthServerProvider.login(credentials).then(function (data) {
                     // retrieve the logged account information
                     Principal.identity(true).then(function(account) {
-                      
                         // After the login the language will be changed to
                         // the language selected by the user during his registration
-                        $translate.use(account.langKey);
-                        $translate.refresh();
+                        $translate.use(account.langKey).then(function(){
+                            $translate.refresh();
+                        });
                         deferred.resolve(data);
                     });
                     return cb();
@@ -42,7 +42,7 @@ angular.module('jhipsterApp')
                             $state.go('home');
                         }
 
-                        if ($rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !Principal.isInAnyRole($rootScope.toState.data.roles)) {
+                        if ($rootScope.toState.data.authorities && $rootScope.toState.data.authorities.length > 0 && !Principal.hasAnyAuthority($rootScope.toState.data.authorities)) {
                             if (isAuthenticated) {
                                 // user is signed in but not authorized for desired state
                                 $state.go('accessdenied');

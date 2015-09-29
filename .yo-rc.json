@@ -11,12 +11,11 @@
     "devDatabaseType": "h2Memory",
     "prodDatabaseType": "mysql",
     "searchEngine": "no",
-    "useCompass": false,
+    "useSass": false,
     "buildTool": "maven",
     "frontendBuilder": "grunt",
     "javaVersion": "8",
     "enableTranslation": true,
-    "rememberMeKey": "ffb7f2b41252aafa288d8435d0ade107ed270605",
-    "useSass": false
+    "rememberMeKey": "f9ce20acaedb16e1a6f82d186a2f8b0620e8f245"
   }
 }

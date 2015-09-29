@@ -7,7 +7,7 @@ angular.module('jhipsterApp')
                 parent: 'account',
                 url: '/logout',
                 data: {
-                    roles: []
+                    authorities: []
                 },
                 views: {
                     'content@': {
