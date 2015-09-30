@@ -1,3 +1,14 @@
+entity BothBlobEntity{
+    imageData ImageBlob,
+    anyData AnyBlob
+}
+entity ImageBlobEntity{
+    imageData ImageBlob
+}
+entity AnyBlobEntity{
+    anyData AnyBlob
+}
+
 entity FieldEntity{
     name String,
     email String required maxlength(30) minlength(5),
