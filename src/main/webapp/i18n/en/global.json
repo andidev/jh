@@ -13,7 +13,7 @@
                 "settings": "Settings",
                 "password": "Password",
                 "sessions": "Sessions",
-                "login": "Authenticate",
+                "login": "Sign in",
                 "logout": "Log out",
                 "register": "Register"
             },
@@ -32,8 +32,8 @@
             "language": "Language"
         },
         "form": {
-            "username": "Login",
-            "username.placeholder": "Your login",
+            "username": "Username",
+            "username.placeholder": "Your username",
             "newpassword": "New password",
             "newpassword.placeholder": "New password",
             "confirmpassword": "New password confirmation",
@@ -43,7 +43,7 @@
         },
         "messages": {
             "info": {
-                "authenticated": "If you want to <a class=\"alert-link\" href=\"#/login\">authenticate</a>, you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\").",
+                "authenticated": "If you want to <a class=\"alert-link\" href=\"#/login\">sign in</a>, you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\").",
                 "register": "You don't have an account yet? <a class=\"alert-link\" href=\"#/register\">Register a new account</a>"
             },
             "error": {
