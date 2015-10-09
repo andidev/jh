@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jhipsterApp')
-    .factory('Auth', function Auth($rootScope, $state, $q, $translate, Principal, AuthServerProvider, Account, Register, Activate, Password, PasswordResetInit, PasswordResetFinish) {
+    .factory('Auth', function Auth($rootScope, $state, $q, $translate, Principal, AuthServerProvider, Account, Register, Activate, Password, PasswordResetInit, PasswordResetFinish, Tracker) {
         return {
             login: function (credentials, callback) {
                 var cb = callback || angular.noop;
@@ -15,6 +15,7 @@ angular.module('jhipsterApp')
                         $translate.use(account.langKey).then(function(){
                             $translate.refresh();
                         });
+                        Tracker.sendActivity();
                         deferred.resolve(data);
                     });
                     return cb();
