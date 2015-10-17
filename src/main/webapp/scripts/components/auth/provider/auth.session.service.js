@@ -9,7 +9,7 @@ angular.module('jhipsterApp')
                     '&remember-me=' + credentials.rememberMe + '&submit=Login';
                 return $http.post('api/authentication', data, {
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                     }
                 }).success(function (response) {
                     return response;
