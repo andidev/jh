@@ -1,4 +1,4 @@
-// Generated on 2015-08-09 using generator-jhipster 2.19.0
+// Generated on 2015-10-17 using generator-jhipster 2.22.0
 'use strict';
 var fs = require('fs');
 
@@ -80,7 +80,7 @@ module.exports = function (grunt) {
                         'src/main/webapp/**/*.html',
                         'src/main/webapp/**/*.json',
                         'src/main/webapp/assets/styles/**/*.css',
-                        'src/main/webapp/scripts/**/*.js',
+                        'src/main/webapp/scripts/**/*.{js,html}',
                         'src/main/webapp/assets/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
                         'tmp/**/*.{css,js}'
                     ]
@@ -361,23 +361,6 @@ module.exports = function (grunt) {
         'htmlmin'
     ]);
 
-	grunt.registerTask('appendSkipBower', 'Force skip of bower for Gradle', function () {
-
-		if (!grunt.file.exists(filepath)) {
-			// Assume this is a maven project
-			return true;
-		}
-
-		var fileContent = grunt.file.read(filepath);
-		var skipBowerIndex = fileContent.indexOf("skipBower=true");
-
-		if (skipBowerIndex != -1) {
-			return true;
-		}
-
-		grunt.file.write(filepath, fileContent + "\nskipBower=true\n");
-	});
-
     grunt.registerTask('buildOpenshift', [
         'test',
         'build',
@@ -391,8 +374,5 @@ module.exports = function (grunt) {
         'buildcontrol:openshift'
     ]);
 
-    grunt.registerTask('default', [
-        'test',
-        'build'
-    ]);
+    grunt.registerTask('default', ['serve']);
 };

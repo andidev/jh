@@ -2,7 +2,7 @@
 
 angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pascalprecht.translate', 
                'ui.bootstrap', // for modal dialogs
-    'ngResource', 'ui.router', 'ngCookies', 'ngCacheBuster', 'ngFileUpload', 'infinite-scroll'])
+    'ngResource', 'ui.router', 'ngCookies', 'ngAria', 'ngCacheBuster', 'ngFileUpload', 'infinite-scroll'])
 
     .run(function ($rootScope, $location, $window, $http, $state, $translate, Language, Auth, Principal, ENV, VERSION) {
         $rootScope.ENV = ENV;
@@ -25,8 +25,14 @@ angular.module('jhipsterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pasca
         $rootScope.$on('$stateChangeSuccess',  function(event, toState, toParams, fromState, fromParams) {
             var titleKey = 'global.title' ;
 
-            $rootScope.previousStateName = fromState.name;
-            $rootScope.previousStateParams = fromParams;
+            // Remember previous state unless we've been redirected to login or we've just
+            // reset the state memory after logout. If we're redirected to login, our
+            // previousState is already set in the authExpiredInterceptor. If we're going
+            // to login directly, we don't want to be sent to some previous state anyway
+            if (toState.name != 'login' && $rootScope.previousStateName) {
+              $rootScope.previousStateName = fromState.name;
+              $rootScope.previousStateParams = fromParams;
+            }
 
             // Set the page title key to the one configured in state or use default one
             if (toState.data.pageTitle) {
