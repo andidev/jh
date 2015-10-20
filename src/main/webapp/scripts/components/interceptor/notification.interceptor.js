@@ -9,6 +9,6 @@ angular.module('jhipsterApp')
                     AlertService.success(alertKey, { param : response.headers('X-jhipsterApp-params')});
                 }
                 return response;
-            },
+            }
         };
     });
