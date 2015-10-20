@@ -1,0 +1,7 @@
+entity AnEntity {
+    aField String
+}
+
+relationship OneToMany {
+    User{anEntity} to AnEntity{user}
+}
