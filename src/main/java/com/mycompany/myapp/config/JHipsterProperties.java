@@ -3,7 +3,7 @@ package com.mycompany.myapp.config;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.web.cors.CorsConfiguration;
 
 /**
  * Properties specific to JHipster.
@@ -19,8 +19,6 @@ public class JHipsterProperties {
 
     private final Http http = new Http();
 
-    private final Datasource datasource = new Datasource();
-
     private final Cache cache = new Cache();
 
     private final Mail mail = new Mail();
@@ -31,16 +29,16 @@ public class JHipsterProperties {
 
     private final Metrics metrics = new Metrics();
 
+    private final CorsConfiguration cors = new CorsConfiguration();
+
+
+
     public Async getAsync() {
         return async;
     }
 
     public Http getHttp() {
         return http;
-    }
-
-    public Datasource getDatasource() {
-        return datasource;
     }
 
     public Cache getCache() {
@@ -62,6 +60,11 @@ public class JHipsterProperties {
     public Metrics getMetrics() {
         return metrics;
     }
+
+    public CorsConfiguration getCors() {
+        return cors;
+    }
+
 
     public static class Async {
 
@@ -118,59 +121,6 @@ public class JHipsterProperties {
         }
     }
 
-    public static class Datasource {
-
-        private String serverName;
-
-        private boolean cachePrepStmts = true;
-
-        private int prepStmtCacheSize = 250;
-
-        private int prepStmtCacheSqlLimit = 2048;
-
-        private boolean useServerPrepStmts = true;
-
-        public String getServerName() {
-            return serverName;
-        }
-
-        public void setServerName(String serverName) {
-            this.serverName = serverName;
-        }
-
-        public boolean isCachePrepStmts() {
-            return cachePrepStmts;
-        }
-
-        public void setCachePrepStmts(boolean cachePrepStmts) {
-            this.cachePrepStmts = cachePrepStmts;
-        }
-
-        public int getPrepStmtCacheSize() {
-            return prepStmtCacheSize;
-        }
-
-        public void setPrepStmtCacheSize(int prepStmtCacheSize) {
-            this.prepStmtCacheSize = prepStmtCacheSize;
-        }
-
-        public int getPrepStmtCacheSqlLimit() {
-            return prepStmtCacheSqlLimit;
-        }
-
-        public void setPrepStmtCacheSqlLimit(int prepStmtCacheSqlLimit) {
-            this.prepStmtCacheSqlLimit = prepStmtCacheSqlLimit;
-        }
-
-        public boolean isUseServerPrepStmts() {
-            return useServerPrepStmts;
-        }
-
-        public void setUseServerPrepStmts(boolean useServerPrepStmts) {
-            this.useServerPrepStmts = useServerPrepStmts;
-        }
-    }
-
     public static class Cache {
 
         private int timeToLiveSeconds = 3600;
@@ -205,77 +155,7 @@ public class JHipsterProperties {
 
     public static class Mail {
 
-        private String host = "localhost";
-
-        private int port = 25;
-
-        private String username;
-
-        private String password;
-
-        private String protocol = "smtp";
-
-        private boolean tls = false;
-
-        private boolean auth = false;
-
-        private String from = "jhipster@localhost";
-
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(String host) {
-                this.host = host;
-        }
-
-        public int getPort() {
-            return port;
-        }
-
-        public void setPort(int port) {
-            this.port = port;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getProtocol() {
-            return protocol;
-        }
-
-        public void setProtocol(String protocol) {
-            this.protocol = protocol;
-        }
-
-        public boolean isTls() {
-            return tls;
-        }
-
-        public void setTls(boolean tls) {
-            this.tls = tls;
-        }
-
-        public boolean isAuth() {
-            return auth;
-        }
-
-        public void setAuth(boolean auth) {
-            this.auth = auth;
-        }
+        private String from = "jh@localhost";
 
         public String getFrom() {
             return from;
@@ -311,9 +191,9 @@ public class JHipsterProperties {
 
     public static class Swagger {
 
-        private String title = "jhipster API";
+        private String title = "jh API";
 
-        private String description = "jhipster API documentation";
+        private String description = "jh API documentation";
 
         private String version = "0.0.1";
 
@@ -456,7 +336,7 @@ public class JHipsterProperties {
 
             private int port = 2003;
 
-            private String prefix = "jhipster";
+            private String prefix = "jh";
 
             public boolean isEnabled() {
                 return enabled;

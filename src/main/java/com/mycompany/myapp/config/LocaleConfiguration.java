@@ -1,6 +1,7 @@
 package com.mycompany.myapp.config;
 
 import com.mycompany.myapp.config.locale.AngularCookieLocaleResolver;
+
 import org.springframework.boot.bind.RelaxedPropertyResolver;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.MessageSource;
@@ -28,15 +29,6 @@ public class LocaleConfiguration extends WebMvcConfigurerAdapter implements Envi
         AngularCookieLocaleResolver cookieLocaleResolver = new AngularCookieLocaleResolver();
         cookieLocaleResolver.setCookieName("NG_TRANSLATE_LANG_KEY");
         return cookieLocaleResolver;
-    }
-
-    @Bean
-    public MessageSource messageSource() {
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:/i18n/messages");
-        messageSource.setDefaultEncoding("UTF-8");
-        messageSource.setCacheSeconds(propertyResolver.getProperty("cache-seconds", Integer.class, -1));
-        return messageSource;
     }
 
     @Override

@@ -10,16 +10,9 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
-
-
-# ===================================================================
-# JHipster specific properties
-# ===================================================================
-
 spring:
     datasource:
-        driver-class-name: org.h2.jdbcx.JdbcDataSource
-        url: jdbc:h2:mem:jhipster;DB_CLOSE_DELAY=-1
+        url: jdbc:h2:mem:jh;DB_CLOSE_DELAY=-1
         name:
         username:
         password:
@@ -36,6 +29,8 @@ spring:
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
             hibernate.hbm2ddl.auto: validate
+    mail:
+        host: localhost
     mvc:
         favicon:
             enabled: false
@@ -62,24 +57,15 @@ jhipster:
         corePoolSize: 2
         maxPoolSize: 50
         queueCapacity: 10000
-    mail:
-        host: localhost
-        port: 25
-        username:
-        password:
-        protocol: smtp
-        tls: false
-        auth: false
-        from: jhipster@localhost
     security:
         rememberme:
             # security key (this key should be unique for your application, and kept secret)
-            key: 4cbd3c296420c0a655ef75a2019fe0a00556facf
+            key: 285ddfbab7ea88ec280b37dd14090ee109cf964a
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
     swagger:
-        title: jhipster API
-        description: jhipster API documentation
+        title: jh API
+        description: jh API documentation
         version: 0.0.1
         termsOfServiceUrl:
         contact:

@@ -12,9 +12,7 @@ import fr.ippon.spark.metrics.SparkReporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -24,7 +22,6 @@ import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableMetrics(proxyTargetClass = true)
-@Profile("!" + Constants.SPRING_PROFILE_FAST)
 public class MetricsConfiguration extends MetricsConfigurerAdapter {
 
     private static final String PROP_METRIC_REG_JVM_MEMORY = "jvm.memory";
@@ -63,7 +60,7 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
         metricRegistry.register(PROP_METRIC_REG_JVM_FILES, new FileDescriptorRatioGauge());
         metricRegistry.register(PROP_METRIC_REG_JVM_BUFFERS, new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()));
         if (jHipsterProperties.getMetrics().getJmx().isEnabled()) {
-            log.info("Initializing Metrics JMX reporting");
+            log.debug("Initializing Metrics JMX reporting");
             JmxReporter jmxReporter = JmxReporter.forRegistry(metricRegistry).build();
             jmxReporter.start();
         }
@@ -71,7 +68,6 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
 
     @Configuration
     @ConditionalOnClass(Graphite.class)
-    @Profile("!" + Constants.SPRING_PROFILE_FAST)
     public static class GraphiteRegistry {
 
         private final Logger log = LoggerFactory.getLogger(GraphiteRegistry.class);
@@ -91,10 +87,10 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
                 String graphitePrefix = jHipsterProperties.getMetrics().getGraphite().getPrefix();
                 Graphite graphite = new Graphite(new InetSocketAddress(graphiteHost, graphitePort));
                 GraphiteReporter graphiteReporter = GraphiteReporter.forRegistry(metricRegistry)
-                        .convertRatesTo(TimeUnit.SECONDS)
-                        .convertDurationsTo(TimeUnit.MILLISECONDS)
-                        .prefixedWith(graphitePrefix)
-                        .build(graphite);
+                    .convertRatesTo(TimeUnit.SECONDS)
+                    .convertDurationsTo(TimeUnit.MILLISECONDS)
+                    .prefixedWith(graphitePrefix)
+                    .build(graphite);
                 graphiteReporter.start(1, TimeUnit.MINUTES);
             }
         }
@@ -102,7 +98,6 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
 
     @Configuration
     @ConditionalOnClass(SparkReporter.class)
-    @Profile("!" + Constants.SPRING_PROFILE_FAST)
     public static class SparkRegistry {
 
         private final Logger log = LoggerFactory.getLogger(SparkRegistry.class);
@@ -120,9 +115,9 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
                 String sparkHost = jHipsterProperties.getMetrics().getSpark().getHost();
                 Integer sparkPort = jHipsterProperties.getMetrics().getSpark().getPort();
                 SparkReporter sparkReporter = SparkReporter.forRegistry(metricRegistry)
-                        .convertRatesTo(TimeUnit.SECONDS)
-                        .convertDurationsTo(TimeUnit.MILLISECONDS)
-                        .build(sparkHost, sparkPort);
+                    .convertRatesTo(TimeUnit.SECONDS)
+                    .convertDurationsTo(TimeUnit.MILLISECONDS)
+                    .build(sparkHost, sparkPort);
                 sparkReporter.start(1, TimeUnit.MINUTES);
             }
         }

@@ -1,21 +1,25 @@
 {
   "generator-jhipster": {
-    "baseName": "jhipster",
+    "jhipsterVersion": "2.27.0",
+    "baseName": "jh",
     "packageName": "com.mycompany.myapp",
     "packageFolder": "com/mycompany/myapp",
     "authenticationType": "session",
     "hibernateCache": "ehcache",
     "clusteredHttpSession": "no",
-    "websocket": "spring-websocket",
+    "websocket": "no",
     "databaseType": "sql",
-    "devDatabaseType": "h2Memory",
+    "devDatabaseType": "h2Disk",
     "prodDatabaseType": "mysql",
     "searchEngine": "no",
-    "useSass": false,
     "buildTool": "maven",
-    "frontendBuilder": "grunt",
-    "javaVersion": "8",
+    "enableSocialSignIn": false,
+    "rememberMeKey": "285ddfbab7ea88ec280b37dd14090ee109cf964a",
+    "useSass": false,
     "enableTranslation": true,
-    "rememberMeKey": "4cbd3c296420c0a655ef75a2019fe0a00556facf"
+    "applicationType": "monolith",
+    "testFrameworks": [
+      "gatling"
+    ]
   }
 }

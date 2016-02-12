@@ -21,8 +21,7 @@ import java.util.SortedSet;
 
 @Configuration
 @EnableCaching
-@AutoConfigureAfter(value = {MetricsConfiguration.class, DatabaseConfiguration.class})
-@Profile("!" + Constants.SPRING_PROFILE_FAST)
+@AutoConfigureAfter(value = { MetricsConfiguration.class, DatabaseConfiguration.class })
 public class CacheConfiguration {
 
     private final Logger log = LoggerFactory.getLogger(CacheConfiguration.class);
